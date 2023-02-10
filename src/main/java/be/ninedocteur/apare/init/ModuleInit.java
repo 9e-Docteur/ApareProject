@@ -4,6 +4,7 @@ import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.api.module.ModuleRegistry;
 import be.ninedocteur.apare.module.AdminModule;
 import be.ninedocteur.apare.module.CheckoutModule;
+import be.ninedocteur.apare.module.LoginModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,9 @@ public class ModuleInit {
     private static void initApareModule(){
         Module checkoutModule = new CheckoutModule();
         Module adminModule = new AdminModule();
+        Module loginModule = new LoginModule();
         ModuleRegistry.registerModule(checkoutModule);
         ModuleRegistry.registerModule(adminModule);
+        ModuleRegistry.registerModule(loginModule);
     }
 }

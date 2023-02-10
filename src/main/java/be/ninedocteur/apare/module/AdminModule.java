@@ -1,6 +1,7 @@
 package be.ninedocteur.apare.module;
 
 import be.ninedocteur.apare.api.module.Module;
+import be.ninedocteur.apare.frames.NotifyFrame;
 
 import javax.swing.*;
 

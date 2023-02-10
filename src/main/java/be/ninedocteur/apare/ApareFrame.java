@@ -3,6 +3,7 @@ package be.ninedocteur.apare;
 import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.api.module.ModuleRegistry;
 import be.ninedocteur.apare.init.ModuleInit;
+import be.ninedocteur.apare.utils.Logger;
 import javafx.scene.control.ButtonType;
 
 import javax.swing.*;
@@ -44,7 +45,7 @@ public class ApareFrame extends JFrame implements ActionListener {
 
 
         for(Module module : ModuleRegistry.moduleList){
-            button.setBounds(ModuleRegistry.getModuleList().size(), 0, 20, 120);
+            button.setBounds(getWidth() / 2, ModuleRegistry.getModuleList().size() + 10, 20, 120);
             ApareFrame.moduleToLaunch = module;
             button.setText(module.getName());
             button.addActionListener(this);
@@ -65,6 +66,7 @@ public class ApareFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ApareFrame.button){
             Module.execute(moduleToLaunch);
+            Logger.send("Launching " + moduleToLaunch.getName() + "...", Logger.Type.SUCCESS);
         }
     }
 }
