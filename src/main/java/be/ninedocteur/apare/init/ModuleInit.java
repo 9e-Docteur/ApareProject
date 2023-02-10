@@ -1,0 +1,30 @@
+package be.ninedocteur.apare.init;
+
+import be.ninedocteur.apare.api.module.Module;
+import be.ninedocteur.apare.api.module.ModuleRegistry;
+import be.ninedocteur.apare.module.AdminModule;
+import be.ninedocteur.apare.module.CheckoutModule;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ModuleInit {
+    private static List<Module> moduleToInit = new ArrayList();
+    public static void init(){
+        initApareModule();
+        for(Module module : moduleToInit){
+            ModuleRegistry.registerModule(module);
+        }
+    }
+
+    public static void initModule(Module module){
+        moduleToInit.add(module);
+    }
+
+    private static void initApareModule(){
+        Module checkoutModule = new CheckoutModule();
+        Module adminModule = new AdminModule();
+        ModuleRegistry.registerModule(checkoutModule);
+        ModuleRegistry.registerModule(adminModule);
+    }
+}
