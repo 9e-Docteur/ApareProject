@@ -1,5 +1,6 @@
 package be.ninedocteur.apare.init;
 
+import be.ninedocteur.apare.ApareFrame;
 import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.api.module.ModuleRegistry;
 import be.ninedocteur.apare.module.AdminModule;
@@ -29,5 +30,6 @@ public class ModuleInit {
         ModuleRegistry.registerModule(checkoutModule);
         ModuleRegistry.registerModule(adminModule);
         ModuleRegistry.registerModule(loginModule);
+        ApareFrame.setLoaded(true);
     }
 }

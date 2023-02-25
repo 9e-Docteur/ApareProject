@@ -7,8 +7,10 @@ import be.ninedocteur.apare.utils.Logger;
 import javafx.scene.control.ButtonType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ApareFrame extends JFrame implements ActionListener {
 
@@ -43,13 +45,20 @@ public class ApareFrame extends JFrame implements ActionListener {
 
         chose.setText("Choose a module to launch...");
 
-
+        ArrayList<JButton> buttonList = new ArrayList();
         for(Module module : ModuleRegistry.moduleList){
-            button.setBounds(getWidth() / 2, ModuleRegistry.getModuleList().size() + 10, 20, 120);
+            JPanel panel = new JPanel();
+            panel.add(button);
+            panel.add(state);
+            buttonList.add(button);
+            panel.setSize(new Dimension(50, 20));
+            button.setBounds(getWidth() / 2, ModuleRegistry.getModuleList().size() + 20, 20, 120);
+            button.setSize(new Dimension(70, 20));
             ApareFrame.moduleToLaunch = module;
             button.setText(module.getName());
             button.addActionListener(this);
             frame.add(button);
+            frame.add(panel);
         }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +67,6 @@ public class ApareFrame extends JFrame implements ActionListener {
     }
 
     private static void init(){
-        isLoaded = true;
         ModuleInit.init();
     }
 
@@ -68,5 +76,13 @@ public class ApareFrame extends JFrame implements ActionListener {
             Module.execute(moduleToLaunch);
             Logger.send("Launching " + moduleToLaunch.getName() + "...", Logger.Type.SUCCESS);
         }
+    }
+
+    public static void setLoaded(boolean isLoaded) {
+        ApareFrame.isLoaded = isLoaded;
+    }
+
+    public static boolean isLoaded() {
+        return isLoaded;
     }
 }

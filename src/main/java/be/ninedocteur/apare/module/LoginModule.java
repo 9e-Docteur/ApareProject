@@ -5,6 +5,7 @@ import be.ninedocteur.apare.frames.NotifyFrame;
 import be.ninedocteur.apare.utils.Logger;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
