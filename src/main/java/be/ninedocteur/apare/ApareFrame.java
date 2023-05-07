@@ -4,7 +4,6 @@ import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.api.module.ModuleRegistry;
 import be.ninedocteur.apare.init.ModuleInit;
 import be.ninedocteur.apare.utils.Logger;
-import javafx.scene.control.ButtonType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ApareFrame extends JFrame implements ActionListener {
+public class ApareFrame extends JFrame {
 
     private static Module moduleToLaunch;
 
@@ -45,21 +44,29 @@ public class ApareFrame extends JFrame implements ActionListener {
 
         chose.setText("Choose a module to launch...");
 
-        ArrayList<JButton> buttonList = new ArrayList();
-        for(Module module : ModuleRegistry.moduleList){
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
+        contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        for (Module module : ModuleRegistry.getModuleList()) {
             JPanel panel = new JPanel();
+            JButton button = new JButton(module.getName());
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Module.execute(module);
+                }
+            });
             panel.add(button);
-            panel.add(state);
-            buttonList.add(button);
-            panel.setSize(new Dimension(50, 20));
-            button.setBounds(getWidth() / 2, ModuleRegistry.getModuleList().size() + 20, 20, 120);
-            button.setSize(new Dimension(70, 20));
-            ApareFrame.moduleToLaunch = module;
-            button.setText(module.getName());
-            button.addActionListener(this);
-            frame.add(button);
-            frame.add(panel);
+            panel.add(Box.createRigidArea(new Dimension(0, 20)));
+            contentPane.add(panel);
         }
+
+        JScrollPane scrollPane = new JScrollPane(contentPane);
+        frame.add(scrollPane);
+
+        frame.pack();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -70,13 +77,13 @@ public class ApareFrame extends JFrame implements ActionListener {
         ModuleInit.init();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == ApareFrame.button){
-            Module.execute(moduleToLaunch);
-            Logger.send("Launching " + moduleToLaunch.getName() + "...", Logger.Type.SUCCESS);
-        }
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if(e.getSource() == ApareFrame.button){
+//            Module.execute(moduleToLaunch);
+//            Logger.send("Launching " + moduleToLaunch.getName() + "...", Logger.Type.SUCCESS);
+//        }
+//    }
 
     public static void setLoaded(boolean isLoaded) {
         ApareFrame.isLoaded = isLoaded;
