@@ -28,7 +28,7 @@ public class Apare {
             ConfigSetupFrame configSetupFrame = new ConfigSetupFrame();
             config.createConfig("version", String.valueOf(VERSION));
         }
-        //getModList().add(new ApareBaseAddon("Apare Project Base", "0.1 DEV"));
+        getModList().add(new ApareBaseAddon("Apare Project Base", "0.1 DEV"));
         Item.getOrCreateItemsFile();
         Item.getOrCreateItemsDir();
         Item.getOrCreateImagesDir();

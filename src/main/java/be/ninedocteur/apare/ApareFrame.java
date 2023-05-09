@@ -73,9 +73,6 @@ public class ApareFrame extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(720, 480);
-
-        JLabel label = Screen.drawImage(new TextureLocation("ApareProject", "lol.jpg"));
-        frame.add(label);
     }
 
     private static void init(){
