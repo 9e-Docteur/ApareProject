@@ -1,12 +1,19 @@
 package be.ninedocteur.apare.utils;
 
+import be.ninedocteur.apare.Apare;
+import be.ninedocteur.apare.api.event.EventRegistry;
+import be.ninedocteur.apare.event.LoggerEvent;
+
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Logger {
     private static String tempString;
-    public static void send(String message, Type type){
+    private static String message;
+    public void send(String message, Type type){
         Date date = new Date();
+
         /* NOT WORKING
         switch (type){
             case NORMAL:
@@ -23,16 +30,25 @@ public class Logger {
         if(type == Type.NORMAL && message != tempString){
             MessageUtils.send("("+ date.getHours() + ":" + date.getMinutes() +") " + message);
             tempString = "("+ date.getHours() + ":" + date.getMinutes() +") " + message;
+            Logger.message = tempString;
         } else if(type == Type.WARN && message != tempString){
             MessageUtils.sendWarn("("+ date.getHours() + ":" + date.getMinutes() +") " + message);
             tempString = "("+ date.getHours() + ":" + date.getMinutes() +") " + message;
+            Logger.message = tempString;
         } else if(type == Type.ERROR && message != tempString){
             MessageUtils.sendError("("+ date.getHours() + ":" + date.getMinutes() +") " + message);
             tempString = "("+ date.getHours() + ":" + date.getMinutes() +") " + message;
+            Logger.message = tempString;
         } else {
             MessageUtils.sendSuccess("("+ date.getHours() + ":" + date.getMinutes() +") " + message);
             tempString = "("+ date.getHours() + ":" + date.getMinutes() +") " + message;
+            Logger.message = tempString;
         }
+        LoggerEvent event = new LoggerEvent(this);
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public enum Type{

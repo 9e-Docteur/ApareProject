@@ -1,5 +1,7 @@
 package be.ninedocteur.apare.api;
 
+import be.ninedocteur.apare.Apare;
+
 public abstract class ModAddon {
     private String modName;
     private String modVersion;
@@ -7,13 +9,10 @@ public abstract class ModAddon {
     public ModAddon(String modName, String modVersion){
         this.modName = modName;
         this.modVersion = modVersion;
+        Apare.registerModAddon(this);
     }
 
-    public abstract void onModLoad();
-
-    public static void loadMod(ModAddon mod){
-        mod.onModLoad();
-    }
+    public abstract void loadMod();
 
     public String getModName() {
         return modName;

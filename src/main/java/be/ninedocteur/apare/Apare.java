@@ -1,22 +1,32 @@
 package be.ninedocteur.apare;
 
 import be.ninedocteur.apare.api.ModAddon;
+import be.ninedocteur.apare.api.ModLoader;
 import be.ninedocteur.apare.content.Item;
+import be.ninedocteur.apare.frames.ConfigSetupFrame;
 import be.ninedocteur.apare.utils.Downloader;
+import be.ninedocteur.apare.utils.Logger;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Apare {
     public static List<ModAddon> modList = new ArrayList();
+    public static double VERSION = 0.1;
+    public static Logger logger = new Logger();
 
     public static void main(String[] args) throws IOException {
-        ApareFrame apareFrame = new ApareFrame();
-        getModList().add(new ApareBaseAddon("Apare Project Base", "0.1 DEV"));
+        ModLoader modLoader = new ModLoader();
+        ApareConfig config = new ApareConfig();
+        if(config.isConfigFilePresent()){
+            config.checkForConfig();
+            ApareFrame apareFrame = new ApareFrame();
+        } else {
+            ConfigSetupFrame configSetupFrame = new ConfigSetupFrame();
+            config.createConfig("version", String.valueOf(VERSION));
+        }
+        //getModList().add(new ApareBaseAddon("Apare Project Base", "0.1 DEV"));
         Item.getOrCreateItemsFile();
         Item.getOrCreateItemsDir();
         Item.getOrCreateImagesDir();
@@ -24,7 +34,7 @@ public class Apare {
         Item.loadItemsFromFile();
         Apare.downloadAssets();
         for(ModAddon mod : modList){
-            ModAddon.loadMod(mod);
+            mod.loadMod();
         }
     }
 
@@ -38,6 +48,8 @@ public class Apare {
 
     public static void downloadAssets() throws IOException {
         Downloader.downloadImage("https://juststickers.in/wp-content/uploads/2019/11/Internet-error.png", "defaultIcon");
+        for(Item item : Item.getItemList()){
+            Downloader.downloadImage(item.getImageLink(), item.getItemName());
+        }
     }
-
 }

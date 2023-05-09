@@ -3,7 +3,9 @@ package be.ninedocteur.apare;
 import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.api.module.ModuleRegistry;
 import be.ninedocteur.apare.init.ModuleInit;
+import be.ninedocteur.apare.resources.TextureLocation;
 import be.ninedocteur.apare.utils.Logger;
+import be.ninedocteur.apare.utils.Screen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,6 +73,9 @@ public class ApareFrame extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(720, 480);
+
+        JLabel label = Screen.drawImage(new TextureLocation("ApareProject", "lol.jpg"));
+        frame.add(label);
     }
 
     private static void init(){

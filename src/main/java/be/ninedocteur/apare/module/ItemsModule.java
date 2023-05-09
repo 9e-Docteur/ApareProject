@@ -1,5 +1,6 @@
 package be.ninedocteur.apare.module;
 
+import be.ninedocteur.apare.Apare;
 import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.content.Item;
 import be.ninedocteur.apare.utils.Logger;
@@ -39,7 +40,7 @@ public class ItemsModule extends Module {
                 Item item = new Item(imageLink, itemName, price);
                 Item.getItemList().add(item);
                 Item.saveItem();
-                Logger.send("Registered a new item : " + imageLink + " " + itemName + ",  for " + price + "€", Logger.Type.SUCCESS);
+                Apare.logger.send("Registered a new item : " + imageLink + " " + itemName + ",  for " + price + "€", Logger.Type.SUCCESS);
                 clearFields();
             }
         });

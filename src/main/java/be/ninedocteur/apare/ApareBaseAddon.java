@@ -1,6 +1,8 @@
 package be.ninedocteur.apare;
 
+import be.ninedocteur.apare.api.Mod;
 import be.ninedocteur.apare.api.ModAddon;
+import be.ninedocteur.apare.event.LoggerEvent;
 import be.ninedocteur.apare.utils.Logger;
 
 public class ApareBaseAddon extends ModAddon {
@@ -9,7 +11,12 @@ public class ApareBaseAddon extends ModAddon {
     }
 
     @Override
-    public void onModLoad() {
-        Logger.send("Apare Project started successfuly!", Logger.Type.SUCCESS);
+    public void loadMod() {
+        Apare.logger.send("Apare Project started successfuly!", Logger.Type.SUCCESS);
+
+    }
+
+    public void testEvent(LoggerEvent event){
+        Apare.logger.send("LOGGER NOT BLANK", Logger.Type.WARN);
     }
 }

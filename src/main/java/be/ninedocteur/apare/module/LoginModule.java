@@ -1,5 +1,6 @@
 package be.ninedocteur.apare.module;
 
+import be.ninedocteur.apare.Apare;
 import be.ninedocteur.apare.api.module.Module;
 import be.ninedocteur.apare.frames.NotifyFrame;
 import be.ninedocteur.apare.utils.Logger;
@@ -81,7 +82,7 @@ public class LoginModule extends Module implements ActionListener {
         if(e.getSource() == loginButton){
             if (username.equals("admin") && password.equals("admin")) {
                 JOptionPane.showMessageDialog(this.getWindow(), "Connection Successful");
-                Logger.send("User connected", Logger.Type.SUCCESS);
+                Apare.logger.send("User connected", Logger.Type.SUCCESS);
             } else {
                 errorLabel.setText("Username/password is incorrect.");
             }
