@@ -45,6 +45,7 @@ public class Logger {
             Logger.message = tempString;
         }
         LoggerEvent event = new LoggerEvent(this);
+        EventRegistry.fireEvent(event);
     }
 
     public String getMessage() {

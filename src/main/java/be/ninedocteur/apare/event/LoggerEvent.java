@@ -2,7 +2,7 @@ package be.ninedocteur.apare.event;
 
 import be.ninedocteur.apare.utils.Logger;
 
-public class LoggerEvent {
+public class LoggerEvent extends Event{
     private Logger logger;
 
     public LoggerEvent(Logger logger) {

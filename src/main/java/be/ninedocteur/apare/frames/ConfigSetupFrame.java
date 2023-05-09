@@ -18,29 +18,24 @@ public class ConfigSetupFrame extends JFrame {
 
     public ConfigSetupFrame(){
         super("Config Setup");
-        // Initialize configuration hashmaps
         configString = new HashMap<>();
         configBool = new HashMap<>();
         configBool.put("Online Mode", new JCheckBox("", false));
 
-        // Create main panel with BorderLayout
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        // Create configuration string panel with FlowLayout
         JPanel stringPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         for (String key : configString.keySet()) {
             stringPanel.add(new JLabel(key + ":"));
             stringPanel.add(configString.get(key));
         }
 
-        // Create configuration boolean panel with FlowLayout
         JPanel boolPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         for (String key : configBool.keySet()) {
             boolPanel.add(new JLabel(key + ":"));
             boolPanel.add(configBool.get(key));
         }
 
-        // Create bottom panel with FlowLayout
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() {
@@ -52,15 +47,12 @@ public class ConfigSetupFrame extends JFrame {
         });
         bottomPanel.add(okButton);
 
-        // Add panels to main panel
         mainPanel.add(stringPanel, BorderLayout.NORTH);
         mainPanel.add(boolPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Set main panel as content pane
         setContentPane(mainPanel);
 
-        // Set window size and make visible
         setSize(new Dimension(400, 200));
         setVisible(true);
     }

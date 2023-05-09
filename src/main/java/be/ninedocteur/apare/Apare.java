@@ -2,6 +2,7 @@ package be.ninedocteur.apare;
 
 import be.ninedocteur.apare.api.ModAddon;
 import be.ninedocteur.apare.api.ModLoader;
+import be.ninedocteur.apare.api.event.EventRegistry;
 import be.ninedocteur.apare.content.Item;
 import be.ninedocteur.apare.frames.ConfigSetupFrame;
 import be.ninedocteur.apare.utils.Downloader;
@@ -19,6 +20,7 @@ public class Apare {
     public static void main(String[] args) throws IOException {
         ModLoader modLoader = new ModLoader();
         ApareConfig config = new ApareConfig();
+        EventRegistry.addListener(ApareBaseAddon::testEvent);
         if(config.isConfigFilePresent()){
             config.checkForConfig();
             ApareFrame apareFrame = new ApareFrame();

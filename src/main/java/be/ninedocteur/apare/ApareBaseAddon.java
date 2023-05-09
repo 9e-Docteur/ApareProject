@@ -2,6 +2,7 @@ package be.ninedocteur.apare;
 
 import be.ninedocteur.apare.api.Mod;
 import be.ninedocteur.apare.api.ModAddon;
+import be.ninedocteur.apare.event.Event;
 import be.ninedocteur.apare.event.LoggerEvent;
 import be.ninedocteur.apare.utils.Logger;
 
@@ -16,7 +17,7 @@ public class ApareBaseAddon extends ModAddon {
 
     }
 
-    public void testEvent(LoggerEvent event){
+    public static void testEvent(LoggerEvent event){
         Apare.logger.send("LOGGER NOT BLANK", Logger.Type.WARN);
     }
 }
